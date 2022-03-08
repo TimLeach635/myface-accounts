@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyFace.Repositories;
+using MyFace.Services;
 
 namespace MyFace
 {
@@ -39,6 +40,8 @@ namespace MyFace
             });
 
             services.AddControllers();
+
+            services.AddTransient<IAuthService, AuthService>();
 
             services.AddTransient<IInteractionsRepo, InteractionsRepo>();
             services.AddTransient<IPostsRepo, PostsRepo>();
