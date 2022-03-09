@@ -13,7 +13,7 @@ export function CreatePostForm(): JSX.Element {
     const [userId, setUserId] = useState("");
     const [status, setStatus] = useState<FormStatus>("READY");
 
-    const { username, password } = useContext(LoginContext);
+    const { logOut, username, password } = useContext(LoginContext);
 
     function submitForm(event: FormEvent) {
         event.preventDefault();
@@ -24,7 +24,10 @@ export function CreatePostForm(): JSX.Element {
             password as string
         )
             .then(() => setStatus("FINISHED"))
-            .catch(() => setStatus("ERROR"));
+            .catch(() => {
+                logOut();
+                setStatus("ERROR");
+            });
     }
     
     if (status === "FINISHED") {
